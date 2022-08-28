@@ -1,16 +1,20 @@
 
 const textInput = document.querySelector("input[type='text'][id='test']") as HTMLInputElement
 let validationClass = textInput.getAttribute('vtype')
-let test = '5'
-console.log(typeof parseInt(test));
 
-
-if (validationClass=='alpha') {
-    let value = textInput.value as string
-    console.log(value);
+textInput.addEventListener('input', (event)=>{
+    let target = event.target as HTMLInputElement
+    let value = target.value
     
-    if (typeof parseInt(value)=='number') {
-        console.log('duh');
+    if (Number.isInteger(Number(value))){
+        console.log('yes');
+        
+    }else{
+        console.log('nope');
         
     }
-}
+     
+    
+    
+    
+})
