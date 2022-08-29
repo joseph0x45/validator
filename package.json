@@ -1,0 +1,27 @@
+{
+  "name": "wvalidator",
+  "version": "1.0.0",
+  "description": "a form validation package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheWisePigeon/validator.git"
+  },
+  "keywords": [
+    "form",
+    "validation"
+  ],
+  "author": "TheWisePigeon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheWisePigeon/validator/issues"
+  },
+  "homepage": "https://github.com/TheWisePigeon/validator#readme",
+  "devDependencies": {
+    "typescript": "^4.8.2"
+  }
+}
