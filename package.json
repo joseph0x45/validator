@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A form validation module",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "start": "tsc --watch"
   },
