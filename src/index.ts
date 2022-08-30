@@ -18,7 +18,7 @@ inputs.forEach( element => {
 const whatValidator = (wvValue:Event)=>{
     const target = wvValue.target as HTMLInputElement
     const validator = target.getAttribute('wv')
-
+    alphaOnly.validator(wvValue)
     
 }
 
@@ -30,6 +30,11 @@ const alphaOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
+        if(!Number.isInteger(Number(value))){
+            target.style.cssText = "outline-color: red"
+        }else{
+            target.style.cssText = "outline-color: none"
+        }
     }
 }
 const numOnly: validator = {
