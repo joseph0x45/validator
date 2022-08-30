@@ -50,7 +50,7 @@ const numOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-        
+
     }
 }
 
@@ -58,3 +58,6 @@ const validators = [
     alphaOnly,
     numOnly
 ]
+
+/*****************************************************************REGEX******************************************************************* */
+const numericOnly: RegExp = /[A-B]/
