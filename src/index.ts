@@ -17,8 +17,16 @@ inputs.forEach( element => {
 
 const whatValidator = (wvValue:Event)=>{
     const target = wvValue.target as HTMLInputElement
-    const validator = target.getAttribute('wv')
-    alphaOnly.validator(wvValue)
+    const wv : string = target.getAttribute('wv')
+    const rules = wv.split(' ')
+    rules.forEach(rule => {
+        validators.forEach(validator => {
+            if (validator.alias==rule) {
+                validator.validator(wvValue)
+            }
+        });
+    });
+    // alphaOnly.validator(wvValue)
     
 }
 
@@ -33,18 +41,20 @@ const alphaOnly: validator = {
         if(!Number.isInteger(Number(value))){
             target.style.cssText = "outline-color: red"
         }else{
-            target.style.cssText = "outline-color: none"
+            target.style.cssText = ""
         }
     }
 }
 const numOnly: validator = {
     alias: 'num',
-    validator: ()=>{
-
+    validator: (event: Event)=>{
+        const target = event.target as HTMLInputElement
+        const value = target.value
+        
     }
 }
 
-const validators = {
+const validators = [
     alphaOnly,
     numOnly
-}
+]
