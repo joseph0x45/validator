@@ -38,7 +38,7 @@ const alphaOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-        if(!Number.isInteger(Number(value))){
+        if(Number.isInteger(Number(value))){
             target.style.cssText = "outline-color: red"
         }else{
             target.style.cssText = ""
@@ -50,7 +50,11 @@ const numOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-
+        if(!Number.isInteger(Number(value))){
+            target.style.cssText = "outline-color: red"
+        }else{
+            target.style.cssText = ""
+        }
     }
 }
 
