@@ -27,8 +27,9 @@ const whatValidator = (wvValue:Event)=>{
 //**********************************************************************************VALIDATORS******************************************************************************* */
 const alphaOnly: validator = {
     alias: 'alpha',
-    validator: ()=>{
-        
+    validator: (event: Event)=>{
+        const target = event.target as HTMLInputElement
+        const value = target.value
     }
 }
 const numOnly: validator = {
