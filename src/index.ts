@@ -76,9 +76,10 @@ const alphaOnly: validator = {
         const target = event.target as HTMLInputElement
         const value = target.value
         if(Number.isInteger(Number(value))){        
-            target.style.cssText = "outline-color: red"
+            insertWarning(target, alphaOnly.message)
         }else{
-            target.style.cssText = ""
+            removeWarning(target, alphaOnly.message);
+            
         }
     }
 }
@@ -111,8 +112,9 @@ const hasOneUpperCase: validator = {
         const { target, value } = grabValue(event)
         for(let char of value) {
             if (char!==char.toUpperCase()) {
+                insertWarning(target, hasOneUpperCase.message)
             }else{
-                break
+                removeWarning(target, hasOneUpperCase.message)
             }
             
         }
