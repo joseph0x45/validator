@@ -12,13 +12,7 @@ const grabValue = (event: Event)=>{
     }
 }
 
-const setStyle = (element: HTMLElement, style: string)=>{
-    let currentState = element.style.cssText
-    let newState = currentState + ' ' + style + ';'
-    console.log(element.style.cssText);
-    element.style.cssText = newState
 
-}
 
 const insertWarning = (target: HTMLElement, warningText: string)=>{
     let span: HTMLElement| null = document.querySelector(`span[warning='${warningText}'][id='${target.id}']`)
@@ -115,8 +109,6 @@ const hasOneUpperCase: validator = {
         console.log('trigger');
         for(let char of value) {
             if (char!==char.toUpperCase()) {
-                setStyle(target, "outline-color: red")
-                // target.style.cssText = "outline-color: red"
             }else{
                 target.style.cssText = ""
                 break

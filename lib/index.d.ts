@@ -6,7 +6,6 @@ declare const grabValue: (event: Event) => {
     target: HTMLInputElement;
     value: string;
 };
-declare const setStyle: (element: HTMLElement, style: string) => void;
 declare const insertWarning: (target: HTMLElement, warningText: string) => void;
 declare const removeWarning: (target: HTMLElement, warning: string) => void;
 declare const inputs: NodeListOf<Element>;
