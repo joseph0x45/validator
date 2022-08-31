@@ -3,6 +3,7 @@ interface validator  {
     validator: Function
 }
 
+/// NOTE *************************UTILITY FUNCTIONS******************************************//
 const grabValue = (event: Event)=>{
     const target = event.target as HTMLInputElement
     return {
@@ -19,6 +20,14 @@ const setStyle = (element: HTMLElement, style: string)=>{
 
 }
 
+const insertWarning = (target: HTMLElement)=>{
+    const warning = document.createElement("span")
+    warning.style.cssText = ""
+    target.after(warning, "Test")
+}
+
+
+// NOTE ****************************************************CORE*******************************************************************************************/
 const inputs = document.querySelectorAll("input[type='text']")
 
 inputs.forEach( element => {
@@ -29,7 +38,7 @@ inputs.forEach( element => {
     )
     
 });
-
+//***************************************************************************************************************************************************** */
 
 const whatValidator = (wvValue:Event)=>{
     const target = wvValue.target as HTMLInputElement
@@ -67,7 +76,7 @@ const numOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-            console.log(target.style.cssText);            
+        insertWarning(target)      
         if(!Number.isInteger(Number(value))){        
             target.style.cssText = "outline-color: red"
         }else{
