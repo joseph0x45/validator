@@ -21,18 +21,24 @@ const setStyle = (element: HTMLElement, style: string)=>{
 }
 
 const insertWarning = (target: HTMLElement, warningText: string)=>{
-    const span = document.createElement("span")
+    let span: HTMLElement| null = document.querySelector(`span[warning='${warningText}'][id='${target.id}']`)
+    if (span) {
+        return
+    }
+    span = document.createElement("span")
     span.innerText = warningText
     span.style.cssText = "color: red; font-size:10px; display: block;"
     span.setAttribute("warning", warningText)
     span.setAttribute("id", target.id)
-    console.log(span);
     
     target.after(span)
 }
 
 const removeWarning = (target: HTMLElement, warning: string)=>{
-    const span = document.querySelector(`span[warning='${warning}'][id='${target.id}']`)
+    const span: HTMLElement| null = document.querySelector(`span[warning='${warning}'][id='${target.id}']`)
+    if(span==null){
+        return
+    }
     console.log(span);
     span.remove()
     
