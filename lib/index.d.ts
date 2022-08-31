@@ -2,7 +2,7 @@ interface validator {
     alias: string;
     validator: Function;
 }
-declare const inputs: NodeListOf<HTMLInputElement>;
+declare const inputs: NodeListOf<Element>;
 declare const whatValidator: (wvValue: Event) => void;
 declare const alphaOnly: validator;
 declare const numOnly: validator;

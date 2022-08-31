@@ -3,7 +3,7 @@ interface validator  {
     validator: Function
 }
 
-const inputs = document.querySelectorAll("input")
+const inputs = document.querySelectorAll("input[type, 'text']")
 
 inputs.forEach( element => {
     element.addEventListener(
@@ -30,7 +30,7 @@ const whatValidator = (wvValue:Event)=>{
     
 }
 
-
+ 
 
 //**********************************************************************************VALIDATORS******************************************************************************* */
 const alphaOnly: validator = {
@@ -45,6 +45,7 @@ const alphaOnly: validator = {
         }
     }
 }
+
 const numOnly: validator = {
     alias: 'num',
     validator: (event: Event)=>{
@@ -57,6 +58,8 @@ const numOnly: validator = {
         }
     }
 }
+
+
 
 const validators = [
     alphaOnly,
