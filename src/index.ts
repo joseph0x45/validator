@@ -33,7 +33,6 @@ const removeWarning = (target: HTMLElement, warning: string)=>{
     if(span==null){
         return
     }
-    console.log(span);
     span.remove()
     
 }
@@ -106,11 +105,9 @@ const hasOneUpperCase: validator = {
     alias: '1up',
     validator: (event: Event)=>{
         const { target, value } = grabValue(event)
-        console.log('trigger');
         for(let char of value) {
             if (char!==char.toUpperCase()) {
             }else{
-                target.style.cssText = ""
                 break
             }
             
