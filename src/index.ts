@@ -1,6 +1,7 @@
 interface validator  {
     alias: string
     validator: Function
+    message: string
 }
 
 /// NOTE *************************UTILITY FUNCTIONS******************************************//
@@ -70,6 +71,7 @@ const whatValidator = (wvValue:Event)=>{
 // NOTE **************************************************VALIDATORS***************************************************************** */
 const alphaOnly: validator = {
     alias: 'alpha',
+    message: 'This field must not be a numeric values',
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
@@ -83,26 +85,28 @@ const alphaOnly: validator = {
 
 const numOnly: validator = {
     alias: 'num',
+    message: 'This field must only contain numerical values',
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
         if(!Number.isInteger(Number(value))){        
-            insertWarning(target, "Une erreur est survenue")      
+            insertWarning(target, numOnly.message)      
         }else{
-            removeWarning(target, "Une erreur est survenue")
+            removeWarning(target, numOnly.message)
         }
     }
 }
 
-const email: validator = {
-    alias: 'email',
-    validator: (event : Event)=>{
+// const email: validator = {
+//     alias: 'email',
+//     validator: (event : Event)=>{
 
-    }
-}
+//     }
+// }
 
 const hasOneUpperCase: validator = {
     alias: '1up',
+    message: 'Must contain at least one uppercase letter',
     validator: (event: Event)=>{
         const { target, value } = grabValue(event)
         for(let char of value) {
