@@ -3,6 +3,11 @@ interface validator  {
     validator: Function
 }
 
+const grabValue = (event: Event)=>{
+    const target = event.target as HTMLInputElement
+    return target.value
+}
+
 const inputs = document.querySelectorAll("input[type, 'text']")
 
 inputs.forEach( element => {
@@ -32,7 +37,7 @@ const whatValidator = (wvValue:Event)=>{
 
  
 
-//**********************************************************************************VALIDATORS******************************************************************************* */
+// NOTE **************************************************VALIDATORS***************************************************************** */
 const alphaOnly: validator = {
     alias: 'alpha',
     validator: (event: Event)=>{
@@ -59,12 +64,26 @@ const numOnly: validator = {
     }
 }
 
+const email: validator = {
+    alias: 'email',
+    validator: (event : Event)=>{
+
+    }
+}
+
+const hasOneUpperCase: validator = {
+    alias: '1up',
+    validator: (event: Event)=>{
+        const value = grabValue(event)
+    }
+}
 
 
 const validators = [
     alphaOnly,
-    numOnly
+    numOnly,
+    hasOneUpperCase
 ]
 
-/*****************************************************************REGEX******************************************************************* */
+// NOTE *****************************************************************REGEX******************************************************************* */
 const numericOnly: RegExp = /[A-B]/
