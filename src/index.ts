@@ -20,10 +20,13 @@ const setStyle = (element: HTMLElement, style: string)=>{
 
 }
 
-const insertWarning = (target: HTMLElement)=>{
-    const warning = document.createElement("span")
-    warning.style.cssText = ""
-    target.after(warning, "Test")
+const insertWarning = (target: HTMLElement, warningText: string)=>{
+    const span = document.createElement("span")
+    span.innerText = warningText
+    span.style.cssText = "color: red; font-size:10px; display: block;"
+    console.log(span);
+    
+    target.after(span)
 }
 
 
@@ -76,7 +79,7 @@ const numOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-        insertWarning(target)      
+        insertWarning(target, "Une erreur est survenue")      
         if(!Number.isInteger(Number(value))){        
             target.style.cssText = "outline-color: red"
         }else{

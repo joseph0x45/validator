@@ -7,7 +7,7 @@ declare const grabValue: (event: Event) => {
     value: string;
 };
 declare const setStyle: (element: HTMLElement, style: string) => void;
-declare const insertWarning: (target: HTMLElement) => void;
+declare const insertWarning: (target: HTMLElement, warningText: string) => void;
 declare const inputs: NodeListOf<Element>;
 declare const whatValidator: (wvValue: Event) => void;
 declare const alphaOnly: validator;
