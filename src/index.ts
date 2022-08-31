@@ -5,10 +5,21 @@ interface validator  {
 
 const grabValue = (event: Event)=>{
     const target = event.target as HTMLInputElement
-    return target.value
+    return {
+        "target": target,
+        "value": target.value
+    }
 }
 
-const inputs = document.querySelectorAll("input[type, 'text']")
+const setStyle = (element: HTMLElement, style: string)=>{
+    let currentState = element.style.cssText
+    let newState = currentState + ' ' + style + ';'
+    console.log(element.style.cssText);
+    element.style.cssText = newState
+
+}
+
+const inputs = document.querySelectorAll("input[type='text']")
 
 inputs.forEach( element => {
     element.addEventListener(
@@ -43,7 +54,7 @@ const alphaOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-        if(Number.isInteger(Number(value))){
+        if(Number.isInteger(Number(value))){        
             target.style.cssText = "outline-color: red"
         }else{
             target.style.cssText = ""
@@ -56,7 +67,8 @@ const numOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-        if(!Number.isInteger(Number(value))){
+            console.log(target.style.cssText);            
+        if(!Number.isInteger(Number(value))){        
             target.style.cssText = "outline-color: red"
         }else{
             target.style.cssText = ""
@@ -74,7 +86,19 @@ const email: validator = {
 const hasOneUpperCase: validator = {
     alias: '1up',
     validator: (event: Event)=>{
-        const value = grabValue(event)
+        const { target, value } = grabValue(event)
+        console.log('trigger');
+        for(let char of value) {
+            if (char!==char.toUpperCase()) {
+                setStyle(target, "outline-color: red")
+                // target.style.cssText = "outline-color: red"
+            }else{
+                target.style.cssText = ""
+                break
+            }
+            
+        }
+        
     }
 }
 
