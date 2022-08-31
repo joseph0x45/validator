@@ -24,11 +24,19 @@ const insertWarning = (target: HTMLElement, warningText: string)=>{
     const span = document.createElement("span")
     span.innerText = warningText
     span.style.cssText = "color: red; font-size:10px; display: block;"
+    span.setAttribute("warning", warningText)
+    span.setAttribute("id", target.id)
     console.log(span);
     
     target.after(span)
 }
 
+const removeWarning = (target: HTMLElement, warning: string)=>{
+    const span = document.querySelector(`span[warning='${warning}'][id='${target.id}']`)
+    console.log(span);
+    span.remove()
+    
+}
 
 // NOTE ****************************************************CORE*******************************************************************************************/
 const inputs = document.querySelectorAll("input[type='text']")
@@ -79,11 +87,10 @@ const numOnly: validator = {
     validator: (event: Event)=>{
         const target = event.target as HTMLInputElement
         const value = target.value
-        insertWarning(target, "Une erreur est survenue")      
         if(!Number.isInteger(Number(value))){        
-            target.style.cssText = "outline-color: red"
+            insertWarning(target, "Une erreur est survenue")      
         }else{
-            target.style.cssText = ""
+            removeWarning(target, "Une erreur est survenue")
         }
     }
 }
