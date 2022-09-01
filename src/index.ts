@@ -100,12 +100,14 @@ const numOnly: validator = {
     }
 }
 
-// const email: validator = {
-//     alias: 'email',
-//     validator: (event : Event)=>{
-
-//     }
-// }
+const proEmail: validator = {
+    alias: 'email',
+    message: 'Only pro emails are accepted',
+    validator: (event : Event)=>{
+        const { target, value } = grabValue(event)
+        
+    }
+}
 
 const hasOneUpperCase: validator = {
     alias: '1up',
@@ -124,6 +126,13 @@ const hasOneUpperCase: validator = {
     }
 }
 
+const isNCharsLong: validator = {
+    alias: 'min',
+    message: '',
+    validator: (event: Event)=>{
+
+    }
+}
 
 const validators = [
     alphaOnly,
