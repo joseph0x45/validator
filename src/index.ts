@@ -40,7 +40,8 @@ const removeWarning = (target: HTMLElement, warning: string)=>{
 
 // NOTE ****************************************************CORE*******************************************************************************************/
 const simpleTextInputs = document.querySelectorAll("input[type='text']")
-
+const passworwdInputs = document.querySelectorAll("input[type='password']")
+const emailInputs = document.querySelectorAll("input[type='email']")
 
 simpleTextInputs.forEach( element => {
     element.addEventListener(
