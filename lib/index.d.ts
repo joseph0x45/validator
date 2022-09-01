@@ -9,7 +9,7 @@ declare const grabValue: (event: Event) => {
 };
 declare const insertWarning: (target: HTMLElement, warningText: string) => void;
 declare const removeWarning: (target: HTMLElement, warning: string) => void;
-declare const inputs: NodeListOf<Element>;
+declare const simpleTextInputs: NodeListOf<Element>;
 declare const whatValidator: (wvValue: Event) => void;
 declare const alphaOnly: validator;
 declare const numOnly: validator;

@@ -39,9 +39,10 @@ const removeWarning = (target: HTMLElement, warning: string)=>{
 }
 
 // NOTE ****************************************************CORE*******************************************************************************************/
-const inputs = document.querySelectorAll("input[type='text']")
+const simpleTextInputs = document.querySelectorAll("input[type='text']")
 
-inputs.forEach( element => {
+
+simpleTextInputs.forEach( element => {
     element.addEventListener(
         'input', (event)=>{
             whatValidator(event)
