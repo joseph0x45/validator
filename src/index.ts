@@ -150,20 +150,16 @@ const isNCharsLong: validator = {
     message: '',
     validator: (event: Event)=>{
         const {target, value} = grabValue(event)
-        const min = Number(target.getAttribute('wmin'))
-        
-        const max = Number(target.getAttribute('wmax'))
+        let min
+        let max
+        if (target.getAttribute('wmin')) {
+            min = Number(target.getAttribute('wmin'))
+        }
+        if (target.getAttribute('wmax')) {
+            max = Number(target.getAttribute('wmax'))
+        }
         console.log(min, max);
-        if (value.length>max) {
-            insertWarning(target, `Must not exceed ${max} characters`)
-        }else{
-            removeWarning(target, `Must not exceed ${max} characters`)
-        }
-        if (value.length<min) {
-            insertWarning(target, `Must be at least ${min} characters`)
-        }else{
-            removeWarning(target, `Must not exceed ${max} characters`)
-        }
+        
 
     }
 }
