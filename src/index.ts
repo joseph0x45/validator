@@ -1,11 +1,11 @@
-interface validator  {
+interface validator {
     alias: string
     validator: Function
     message: string
 }
 
 /// NOTE *************************UTILITY FUNCTIONS******************************************//
-const grabValue = (event: Event)=>{
+const grabValue = (event: Event) => {
     const target = event.target as HTMLInputElement
     return {
         "target": target,
@@ -15,8 +15,8 @@ const grabValue = (event: Event)=>{
 
 
 
-const insertWarning = (target: HTMLElement, warningText: string)=>{
-    let span: HTMLElement| null = document.querySelector(`span[warning='${warningText}'][id='${target.id}']`)
+const insertWarning = (target: HTMLElement, warningText: string) => {
+    let span: HTMLElement | null = document.querySelector(`span[warning='${warningText}'][id='${target.id}']`)
     if (span) {
         return
     }
@@ -25,17 +25,17 @@ const insertWarning = (target: HTMLElement, warningText: string)=>{
     span.style.cssText = "color: red; font-size:10px; display: block;"
     span.setAttribute("warning", warningText)
     span.setAttribute("id", target.id)
-    
+
     target.after(span)
 }
 
-const removeWarning = (target: HTMLElement, warning: string)=>{
-    const span: HTMLElement| null = document.querySelector(`span[warning='${warning}'][id='${target.id}']`)
-    if(span==null){
+const removeWarning = (target: HTMLElement, warning: string) => {
+    const span: HTMLElement | null = document.querySelector(`span[warning='${warning}'][id='${target.id}']`)
+    if (span == null) {
         return
     }
     span.remove()
-    
+
 }
 
 // NOTE ****************************************************CORE*******************************************************************************************/
@@ -43,61 +43,61 @@ const simpleTextInputs = document.querySelectorAll("input[type='text']")
 const passworwdInputs = document.querySelectorAll("input[type='password']")
 const emailInputs = document.querySelectorAll("input[type='email']")
 
-simpleTextInputs.forEach( element => {
+simpleTextInputs.forEach(element => {
     element.addEventListener(
-        'input', (event)=>{
+        'input', (event) => {
             whatValidator(event)
         }
     )
-    
+
 });
 
-passworwdInputs.forEach( element =>{
+passworwdInputs.forEach(element => {
     element.addEventListener(
-        'input', (event)=>{
+        'input', (event) => {
             whatValidator(event)
         }
     )
 })
 
-emailInputs.forEach( element =>{
+emailInputs.forEach(element => {
     element.addEventListener(
-        'input', (event)=>{
+        'input', (event) => {
             whatValidator(event)
         }
     )
 })
 //***************************************************************************************************************************************************** */
 
-const whatValidator = (wvValue:Event)=>{
+const whatValidator = (wvValue: Event) => {
     const target = wvValue.target as HTMLInputElement
-    const wv : string = target.getAttribute('wv')
+    const wv: string = target.getAttribute('wv')
     const rules = wv.split(' ')
     rules.forEach(rule => {
         validators.forEach(validator => {
-            if (validator.alias==rule) {
+            if (validator.alias == rule) {
                 validator.validator(wvValue)
             }
         });
     });
     // alphaOnly.validator(wvValue)
-    
+
 }
 
- 
+
 
 // NOTE **************************************************VALIDATORS***************************************************************** */
 const alphaOnly: validator = {
     alias: 'alpha',
     message: 'This field must not be a numeric values',
-    validator: (event: Event)=>{
+    validator: (event: Event) => {
         const target = event.target as HTMLInputElement
         const value = target.value
-        if(Number.isInteger(Number(value))){        
+        if (Number.isInteger(Number(value))) {
             insertWarning(target, alphaOnly.message)
-        }else{
+        } else {
             removeWarning(target, alphaOnly.message);
-            
+
         }
     }
 }
@@ -105,12 +105,12 @@ const alphaOnly: validator = {
 const numOnly: validator = {
     alias: 'num',
     message: 'This field must only contain numerical values',
-    validator: (event: Event)=>{
+    validator: (event: Event) => {
         const target = event.target as HTMLInputElement
         const value = target.value
-        if(!Number.isInteger(Number(value))){        
-            insertWarning(target, numOnly.message)      
-        }else{
+        if (!Number.isInteger(Number(value))) {
+            insertWarning(target, numOnly.message)
+        } else {
             removeWarning(target, numOnly.message)
         }
     }
@@ -119,7 +119,7 @@ const numOnly: validator = {
 const proEmail: validator = {
     alias: 'email',
     message: 'Only pro emails are accepted',
-    validator: (event : Event)=>{
+    validator: (event: Event) => {
         const { target, value } = grabValue(event)
 
     }
@@ -128,41 +128,54 @@ const proEmail: validator = {
 const hasOneUpperCase: validator = {
     alias: '1up',
     message: 'Must contain at least one uppercase letter',
-    validator: (event: Event)=>{
+    validator: (event: Event) => {
         const { target, value } = grabValue(event)
         let uppercases = 0
-        for(let char of value) {
-            if (char==char.toUpperCase()) {
-                uppercases+=1
+        for (let char of value) {
+            if (char == char.toUpperCase()) {
+                uppercases += 1
             }
         }
-        if (uppercases>0) {
+        if (uppercases > 0) {
             removeWarning(target, hasOneUpperCase.message)
         } else {
             insertWarning(target, hasOneUpperCase.message)
         }
-        
+
     }
 }
 
 const isNCharsLong: validator = {
     alias: 'len',
     message: '',
-    validator: (event: Event)=>{
-        const {target, value} = grabValue(event)
+    validator: (event: Event) => {
+        const { target, value } = grabValue(event)
         let min: Number
         let max: Number
         if (target.getAttribute('wmin')) {
             min = Number(target.getAttribute('wmin'))
+            const belowMessage = `Must be at least ${min} characters`
+
+            console.log(min);
+
+            if (value.length < min) {
+                insertWarning(target, belowMessage)
+            } else {
+                removeWarning(target, belowMessage)
+            }
         }
         if (target.getAttribute('wmax')) {
             max = Number(target.getAttribute('wmax'))
+            const exceedMessage = `Must not exceed ${max} characters`
+
+            if (value.length > max) {
+                insertWarning(target, exceedMessage)
+            } else {
+                removeWarning(target, exceedMessage)
+            }
+
         }
-        if (value.length>max) {
-            insertWarning(target, `Must not exceed ${max} characters`)
-        }else{
-            removeWarning(target, `Must not exceed ${max} characters`)
-        }
+
 
     }
 }
