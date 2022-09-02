@@ -10,10 +10,15 @@
 <body>
     
     <form action="">
-        <!-- <input type="text" style="background-color: chocolate;" id="test"  wv="alpha 1up"><br>
-        <input type="text" id="bruh"  wv="num"> -->
-        <input type="email"  wmin="3" wmax="5"  name="" wv="1up len" id="email"><br>
-        <input type="password"  name="" wv="len 1up" id="pwd">
+        <input type="text" id="username"  wv="alpha"><br> <!--Must contain alphabetical values only   -->
+        <input type="text" id="username"  wv="num"><br> <!--Must contain numeric values only -->
+        <input type="text" id="username"  wv="1up"><br> <!--Must contain at least one uppercase character-->
+        <input type="text" id="username"  wv="alpha 1up"><br> <!--Must contain at least one uppercase character and only alphabetic characters-->
+        <input type="text" id="username" wmin="5"   wv="len"><br> <!--Must be at least 5 characters long-->
+        <input type="text" id="username" wmax="5" wv="len"><br> <!--Must not exceed 5 characters long-->
+        <input type="text" id="username" wmax="10" wmin="5"  wv="len"><br> <!--Must not exceed 10 characters long and must be at least 5 characters -->
+        <input type="text" id="username" wmax="15"  wv="alpha 1up len"><br> <!--Must contain only alphabetic characters, 
+            contain at least one uppercase character and not exceed 15 characters-->
     </form>
 
 </body>
