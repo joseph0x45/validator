@@ -130,13 +130,16 @@ const hasOneUpperCase: validator = {
     message: 'Must contain at least one uppercase letter',
     validator: (event: Event)=>{
         const { target, value } = grabValue(event)
+        let uppercases = 0
         for(let char of value) {
-            if (char!==char.toUpperCase()) {
-                insertWarning(target, hasOneUpperCase.message)
-            }else{
-                removeWarning(target, hasOneUpperCase.message)
+            if (char==char.toUpperCase()) {
+                uppercases+=1
             }
-            
+        }
+        if (uppercases>0) {
+            removeWarning(target, hasOneUpperCase.message)
+        } else {
+            insertWarning(target, hasOneUpperCase.message)
         }
         
     }
@@ -146,14 +149,30 @@ const isNCharsLong: validator = {
     alias: 'len',
     message: '',
     validator: (event: Event)=>{
+        const {target, value} = grabValue(event)
+        const min = Number(target.getAttribute('wmin'))
         
+        const max = Number(target.getAttribute('wmax'))
+        console.log(min, max);
+        if (value.length>max) {
+            insertWarning(target, `Must not exceed ${max} characters`)
+        }else{
+            removeWarning(target, `Must not exceed ${max} characters`)
+        }
+        if (value.length<min) {
+            insertWarning(target, `Must be at least ${min} characters`)
+        }else{
+            removeWarning(target, `Must not exceed ${max} characters`)
+        }
+
     }
 }
 
 const validators = [
     alphaOnly,
     numOnly,
-    hasOneUpperCase
+    hasOneUpperCase,
+    isNCharsLong
 ]
 
 // NOTE *****************************************************************REGEX******************************************************************* */
