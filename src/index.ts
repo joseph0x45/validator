@@ -51,6 +51,22 @@ simpleTextInputs.forEach( element => {
     )
     
 });
+
+passworwdInputs.forEach( element =>{
+    element.addEventListener(
+        'input', (event)=>{
+            whatValidator(event)
+        }
+    )
+})
+
+emailInputs.forEach( element =>{
+    element.addEventListener(
+        'input', (event)=>{
+            whatValidator(event)
+        }
+    )
+})
 //***************************************************************************************************************************************************** */
 
 const whatValidator = (wvValue:Event)=>{
@@ -105,7 +121,7 @@ const proEmail: validator = {
     message: 'Only pro emails are accepted',
     validator: (event : Event)=>{
         const { target, value } = grabValue(event)
-        
+
     }
 }
 
@@ -127,10 +143,10 @@ const hasOneUpperCase: validator = {
 }
 
 const isNCharsLong: validator = {
-    alias: 'min',
+    alias: 'len',
     message: '',
     validator: (event: Event)=>{
-
+        
     }
 }
 
