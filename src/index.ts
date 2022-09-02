@@ -1,3 +1,6 @@
+/**
+ * Represent the structure of a validator.
+ */
 interface validator {
     alias: string
     validator: Function
@@ -5,6 +8,10 @@ interface validator {
 }
 
 /// NOTE *************************UTILITY FUNCTIONS******************************************//
+/**
+ * 
+ * @param event : An event which takes place in the DOM
+ */
 const grabValue = (event: Event) => {
     const target = event.target as HTMLInputElement
     return {
@@ -14,7 +21,11 @@ const grabValue = (event: Event) => {
 }
 
 
-
+/**
+ * Insert a warning span under an input element 
+ * @param target : The HTML element that caused the event
+ * @param warningText : The text to show to the user
+ */
 const insertWarning = (target: HTMLElement, warningText: string) => {
     let span: HTMLElement | null = document.querySelector(`span[warning='${warningText}'][id='${target.id}']`)
     if (span) {
@@ -29,6 +40,11 @@ const insertWarning = (target: HTMLElement, warningText: string) => {
     target.after(span)
 }
 
+/**
+ * Remove a span under an input element once it's input gets validated
+ * @param target : The HTML element under which was the span to be removed
+ * @param warning : The text showed to the user
+ */
 const removeWarning = (target: HTMLElement, warning: string) => {
     const span: HTMLElement | null = document.querySelector(`span[warning='${warning}'][id='${target.id}']`)
     if (span == null) {
